@@ -18,7 +18,7 @@ class SlotButton {
     }
 
     async getCollections () {
-        const url = `/js/lootaverse/${this.slotName}_collections.json`;
+        const url = `../js/lootaverse/${this.slotName}_collections.json`;
         return await (await fetch(url)).json();
     }
 }
