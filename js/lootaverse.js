@@ -5,6 +5,7 @@ class SlotButton {
         const selector = `#lootaverse-${slotName} .lootaverse-button`;
         this.element = document.querySelector(selector);
         this.slot = this.element.closest('.lootaverse-slot');
+        this.slotName = slotName;
     }
 
     onClick (callback) {
@@ -14,6 +15,11 @@ class SlotButton {
     setSlot (url) {
         this.slot.style.backgroundImage = `url(${url})`;
         this.slot.classList.add('slot-active');
+    }
+
+    async getCollections () {
+        const url = `/js/lootaverse/${this.slotName}_collections.json`;
+        return await (await fetch(url)).json();
     }
 }
 
@@ -54,6 +60,7 @@ class EditModal {
             const metadata = await (await fetch(metadataHttpURI)).json();
             const imageURI = this.sanitizeURI(metadata.image);
             this.img.src = imageURI;
+            this.saveButton.disabled = false;
         });
 
         this.saveButton.addEventListener('click', () => {
@@ -71,7 +78,10 @@ class EditModal {
         this.dropdownButton.textContent = 'Choose collection...';
         this.menu.innerHTML = '';
         this.input.value = '';
+        this.input.disabled = true;
         this.img.src = '';
+        this.selectedCollection = null;
+        this.saveButton.disabled = true;
     }
 
     onSave (callback) {
@@ -106,50 +116,32 @@ async function init () {
     const RPC_ENDPOINT = 'https://cloudflare-eth.com/';
     const provider = new ethers.providers.JsonRpcProvider(RPC_ENDPOINT);
 
-    console.log('Testing Ethereum connection...');
-    console.log('Block number is...', await provider.getBlockNumber());
-
     const avatarSlotButton = new SlotButton('avatar');
     const statsSlotButton = new SlotButton('stats');
     const inventorySlotButton = new SlotButton('inventory');
     const modal = new EditModal('edit-modal', provider);
 
-    avatarSlotButton.onClick(() => {
-        modal.populateCollections([
-            { name: 'Forgotten Runes Wizard\'s Cult', contract: '0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42' },
-            { name: 'MetaHero Universe', contract: '0x6dc6001535e15b9def7b0f6a20a2111dfa9454e2' },
-        ]);
-
+    avatarSlotButton.onClick(async () => {
+        const collections = await avatarSlotButton.getCollections();
+        modal.populateCollections(collections);
         modal.setTitle('Choose your avatar');
-
         modal.onSave(url => { avatarSlotButton.setSlot(url); });
-
         modal.open();
     });
 
-    statsSlotButton.onClick(() => {
-        modal.populateCollections([
-            { name: 'Characters (for Adventurers)', contract: '0x7403ac30de7309a0bf019cda8eec034a5507cbb3' },
-            { name: 'Role for Metaverse', contract: '0xcd4d337554862f9bc9ffffb67465b7d643e4e3ad' },
-        ]);
-
+    statsSlotButton.onClick(async () => {
+        const collections = await statsSlotButton.getCollections();
+        modal.populateCollections(collections);
         modal.setTitle('Choose your stats');
-
         modal.onSave(url => { statsSlotButton.setSlot(url); });
-
         modal.open();
     });
 
-    inventorySlotButton.onClick(() => {
-        modal.populateCollections([
-            { name: 'Loot', contract: '0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7' },
-            { name: 'xLoot', contract: '0x8bf2f876e2dcd2cae9c3d272f325776c82da366d' }
-        ]);
-
+    inventorySlotButton.onClick(async () => {
+        const collections = await inventorySlotButton.getCollections();
+        modal.populateCollections(collections);
         modal.setTitle('Choose your inventory');
-
         modal.onSave(url => { inventorySlotButton.setSlot(url); });
-
         modal.open();
     });
 }
