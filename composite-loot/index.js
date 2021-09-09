@@ -2,9 +2,9 @@ import { ethers } from "../node_modules/ethers/dist/ethers.esm.js";
 
 class SlotButton {
     constructor (slotName) {
-        const selector = `#lootaverse-${slotName} .lootaverse-button`;
+        const selector = `#composite-loot-${slotName} .composite-loot-button`;
         this.element = document.querySelector(selector);
-        this.slot = this.element.closest('.lootaverse-slot');
+        this.slot = this.element.closest('.composite-loot-slot');
         this.slotName = slotName;
     }
 
@@ -18,7 +18,7 @@ class SlotButton {
     }
 
     async getCollections () {
-        const url = `../js/lootaverse/${this.slotName}_collections.json`;
+        const url = `./collections/${this.slotName}_collections.json`;
         return await (await fetch(url)).json();
     }
 }

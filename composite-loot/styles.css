@@ -5,15 +5,15 @@
     height:100%;
 }
 
-body.lootaverse-page {
+body.composite-loot-page {
     padding-top:var(--distance-from-top);
 }
 
-#lootaverse-container {
+#composite-loot-container {
     height:var(--container-size);
 }
 
-#lootaverse-builder {
+#composite-loot-builder {
     --gutter:10px;
     --bottom-pad:100px;
     --cell-size:calc((var(--container-size) - var(--bottom-pad)) / 4);
@@ -24,7 +24,7 @@ body.lootaverse-page {
     grid-gap:var(--gutter);
 }
 
-.lootaverse-slot {
+.composite-loot-slot {
     background:var(--bs-gray-700);
     background-size:contain;
     background-position:center;
@@ -34,11 +34,11 @@ body.lootaverse-page {
     align-items:center;
 }
 
-.lootaverse-slot.slot-active:not(:hover) .lootaverse-button.btn {
+.composite-loot-slot.slot-active:not(:hover) .composite-loot-button.btn {
     display:none;
 }
 
-.lootaverse-button.btn {
+.composite-loot-button.btn {
     background:var(--bs-gray-400);
     color:var(--bs-gray-900);
     border:solid 1px var(--bs-gray-700);
@@ -48,27 +48,27 @@ body.lootaverse-page {
     font-size:1.25rem;
 }
 
-.lootaverse-button.btn:active {
+.composite-loot-button.btn:active {
     background:var(--bs-white);
 }
 
-.lootaverse-button .svg-inline--fa {
+.composite-loot-button .svg-inline--fa {
     width:24px;
     height:24px;
     margin:0 5px 4px 5px;
 }
 
-#lootaverse-avatar {
+#composite-loot-avatar {
     grid-column:span 4;
     grid-row:span 4;
 }
 
-#lootaverse-stats {
+#composite-loot-stats {
     grid-column:span 2;
     grid-row:span 2;
 }
 
-#lootaverse-inventory {
+#composite-loot-inventory {
     grid-column:span 2;
     grid-row:span 2;
 }
