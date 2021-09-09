@@ -26,15 +26,22 @@ body.lootaverse-page {
 
 .lootaverse-slot {
     background:var(--bs-gray-700);
+    background-size:contain;
+    background-position:center;
     border:solid 1px var(--bs-white);
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
+.lootaverse-slot.slot-active:not(:hover) .lootaverse-button.btn {
+    display:none;
+}
+
 .lootaverse-button.btn {
     background:var(--bs-gray-400);
     color:var(--bs-gray-900);
+    border:solid 1px var(--bs-gray-700);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -68,4 +75,5 @@ body.lootaverse-page {
 
 #token-image {
     max-width:100%;
+    max-height:500px;
 }

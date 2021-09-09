@@ -4,10 +4,16 @@ class SlotButton {
     constructor (slotName) {
         const selector = `#lootaverse-${slotName} .lootaverse-button`;
         this.element = document.querySelector(selector);
+        this.slot = this.element.closest('.lootaverse-slot');
     }
 
     onClick (callback) {
         this.element.addEventListener('click', callback);
+    }
+
+    setSlot (url) {
+        this.slot.style.backgroundImage = `url(${url})`;
+        this.slot.classList.add('slot-active');
     }
 }
 
@@ -21,6 +27,7 @@ class EditModal {
         this.menu = this.dropdown.querySelector('.dropdown-menu');
         this.input = this.element.querySelector('#token-id-input');
         this.img = this.element.querySelector('#token-image');
+        this.saveButton = this.element.querySelector('#token-save');
 
         this.selectedCollection = null;
 
@@ -46,8 +53,12 @@ class EditModal {
             const metadataHttpURI = this.sanitizeURI(metadataURI);
             const metadata = await (await fetch(metadataHttpURI)).json();
             const imageURI = this.sanitizeURI(metadata.image);
-            console.log('Fetched token metadata', metadata);
             this.img.src = imageURI;
+        });
+
+        this.saveButton.addEventListener('click', () => {
+            if (this.img.src) this.onSaveCallback(this.img.src);
+            this.component.hide();
         });
     }
 
@@ -61,6 +72,10 @@ class EditModal {
         this.menu.innerHTML = '';
         this.input.value = '';
         this.img.src = '';
+    }
+
+    onSave (callback) {
+        this.onSaveCallback = callback;
     }
 
     populateCollections (collections) {
@@ -107,6 +122,8 @@ async function init () {
 
         modal.setTitle('Choose your avatar');
 
+        modal.onSave(url => { avatarSlotButton.setSlot(url); });
+
         modal.open();
     });
 
@@ -118,6 +135,8 @@ async function init () {
 
         modal.setTitle('Choose your stats');
 
+        modal.onSave(url => { statsSlotButton.setSlot(url); });
+
         modal.open();
     });
 
@@ -128,6 +147,8 @@ async function init () {
         ]);
 
         modal.setTitle('Choose your inventory');
+
+        modal.onSave(url => { inventorySlotButton.setSlot(url); });
 
         modal.open();
     });
