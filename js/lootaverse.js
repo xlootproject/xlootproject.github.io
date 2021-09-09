@@ -59,12 +59,13 @@ class EditModal {
             const metadataHttpURI = this.sanitizeURI(metadataURI);
             const metadata = await (await fetch(metadataHttpURI)).json();
             const imageURI = this.sanitizeURI(metadata.image);
-            this.img.src = imageURI;
+            this.img.style.backgroundImage = `url(${imageURI})`;
+            this.imgSrc = imageURI;
             this.saveButton.disabled = false;
         });
 
         this.saveButton.addEventListener('click', () => {
-            if (this.img.src) this.onSaveCallback(this.img.src);
+            if (this.imgSrc) this.onSaveCallback(this.imgSrc);
             this.component.hide();
         });
     }
@@ -79,7 +80,8 @@ class EditModal {
         this.menu.innerHTML = '';
         this.input.value = '';
         this.input.disabled = true;
-        this.img.src = '';
+        this.imgSrc = null;
+        this.img.style.backgroundImage = '';
         this.selectedCollection = null;
         this.saveButton.disabled = true;
     }

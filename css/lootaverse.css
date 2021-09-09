@@ -74,6 +74,16 @@ body.lootaverse-page {
 }
 
 #token-image {
-    max-width:100%;
-    max-height:500px;
+    background-size:contain;
+    background-position:center;
+    border:1px solid var(--bs-gray-400);
+    width:350px;
+    height:350px;
+}
+
+#edit-modal .dropdown-toggle {
+    border:1px solid var(--bs-gray-400);
+    box-shadow:none!important;
+    padding-left:0.75rem;
+    margin-bottom:20px;
 }
