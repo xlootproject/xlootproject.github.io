@@ -1,0 +1,23 @@
+{
+  "name": "xlootproject-website",
+  "version": "1.0.0",
+  "description": "Website for the xLoot project",
+  "main": "js/scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xlootproject/xlootproject.github.io.git"
+  },
+  "author": "xLoot Community",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xlootproject/xlootproject.github.io/issues"
+  },
+  "homepage": "https://github.com/xlootproject/xlootproject.github.io#readme",
+  "dependencies": {
+    "bootstrap": "5.1.0",
+    "http-server": "13.0.1"
+  }
+}
