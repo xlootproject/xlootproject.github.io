@@ -1,3 +1,10 @@
 #mainNav .navbar-nav .nav-link.active {
     color:var(--bs-white);
 }
+
+@media (max-width:768px) {
+    #mainNav .navbar-nav .nav-link.active {
+        color:rgba(0, 0, 0, 0.55);
+        text-decoration:underline;
+    }
+}
