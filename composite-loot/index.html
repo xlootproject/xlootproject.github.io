@@ -83,19 +83,43 @@
                         <h5 class="modal-title"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="dropdown btn-group">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Choose collection...
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="any-tab" data-bs-toggle="tab" data-bs-target="#any-nft" type="button" role="tab" aria-controls="any-nft" aria-selected="true">
+                                Any NFT
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"></ul>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="yours-tab"  data-bs-toggle="tab" data-bs-target="#your-nfts" type="button" role="tab" aria-controls="your-nfts">
+                                Your NFTs
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="modal-body tab-content">
+                        <div class="tab-pane show active" id="any-nft" role="tabpanel" aria-labelledby="any-tab">
+                            <div class="tab-internal">
+                                <div class="dropdown btn-group">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Choose collection...
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"></ul>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="token-id-label">Token ID:</span>
+                                    <input disabled type="text" id="token-id-input" class="form-control" placeholder="Only numbers" aria-label="Token ID" aria-describedby="token-id-lable">
+                                </div>
+                            </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="token-id-label">Token ID:</span>
-                            <input disabled type="text" id="token-id-input" class="form-control" placeholder="Only numbers" aria-label="Token ID" aria-describedby="token-id-lable">
+                        <div class="tab-pane" id="your-nfts" role="tabpanel" aria-labelledby="yours-tab">
+                            <div class="tab-internal">
+                                <button id="connect-wallet" type="button" class="btn">
+                                    <img src="../assets/img/metamask-fox.svg" />
+                                    Connect your wallet
+                                </button>
+                            </div>
                         </div>
-                        <div id="token-image"></div>
                     </div>
+                    <div id="token-image"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button id="token-save" type="button" class="btn btn-primary" disabled>Save changes</button>

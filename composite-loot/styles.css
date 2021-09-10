@@ -169,7 +169,11 @@ body.composite-loot-page {
     align-self:center;
 }
 
-#edit-modal .modal-body {
+#edit-modal .modal-header {
+    border-bottom:0;
+}
+
+#any-nft .tab-internal {
     display:flex;
     flex-direction:column;
     align-items:stretch;
@@ -187,6 +191,7 @@ body.composite-loot-page {
 }
 
 #edit-modal .modal-footer {
+    margin-top:1rem;
     justify-content:stretch;
 }
 
@@ -194,4 +199,21 @@ body.composite-loot-page {
     flex:1 0;
     padding:0;
     height:3.5rem;
+}
+
+#your-nfts .tab-internal {
+    display:flex;
+}
+
+#connect-wallet {
+    border:solid 1px var(--bs-gray-400);
+    margin:auto;
+}
+
+#connect-wallet:active {
+    background:var(--bs-gray-200);
+}
+
+#connect-wallet img {
+    margin-right:1rem;
 }
