@@ -1,4 +1,5 @@
 [
     { "name": "Forgotten Runes Wizard's Cult", "contract": "0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42" },
+    { "name": "Creature World", "contract": "0xc92ceddfb8dd984a89fb494c376f9a48b999aafc" },
     { "name": "MetaHero Universe", "contract": "0x6dc6001535e15b9def7b0f6a20a2111dfa9454e2" }
 ]
