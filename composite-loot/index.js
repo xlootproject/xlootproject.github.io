@@ -46,6 +46,9 @@ class EditModal {
             this.dropdownButton.textContent = `Collection: ${selected.textContent}`;
             this.selectedCollection = selected.dataset.collectionContract;
             this.input.disabled = false;
+            this.input.value = '';
+            this.img.style.backgroundImage = '';
+            this.imgSrc = null;
         });
 
         this.input.addEventListener('change', async () => {
