@@ -109,6 +109,15 @@ body.composite-loot-page {
         grid-column:span 1;
         grid-row:3 / 4;
     }
+
+    #edit-modal .dropdown {
+        max-width:100%;
+    }
+
+    #edit-modal .dropdown-toggle {
+        width:100%;
+        overflow: hidden;
+    }
 }
 
 #token-image {
