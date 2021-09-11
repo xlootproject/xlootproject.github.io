@@ -1,4 +1,5 @@
 import { ethers } from "../node_modules/ethers/dist/ethers.esm.js";
+import './sharing.js';
 import { SlotButton } from './SlotButton.js';
 import { EditModal } from './EditModal.js';
 

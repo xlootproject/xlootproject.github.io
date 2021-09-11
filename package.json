@@ -19,6 +19,7 @@
   "dependencies": {
     "bootstrap": "5.1.0",
     "ethers": "5.4.6",
+    "html-to-image": "1.7.0",
     "http-server": "13.0.1"
   }
 }
