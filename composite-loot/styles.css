@@ -1,13 +1,15 @@
 :root {
     --bs-body-bg: var(--bs-gray-800) !important;
-    --distance-from-top:3.5rem;
-    --share-bar-height:5rem;
-    --container-size:calc(100vh - var(--distance-from-top) - var(--share-bar-height));
+    --navbar-height:88px;
+    --share-bar-height:3rem;
+    --distance-from-top:calc(var(--navbar-height) + var(--share-bar-height));
+    --container-size:calc(100vh - var(--distance-from-top));
     height:100%;
 }
 
 body.composite-loot-page {
     height:100%;
+    padding-top:var(--navbar-height);
 }
 
 #sharing-bar {
@@ -15,18 +17,22 @@ body.composite-loot-page {
     display:flex;
     align-items:center;
     position:relative;
-    top:var(--distance-from-top);
 }
 
 #composite-loot-container {
-    padding-top:var(--distance-from-top);
-    height:100%;
+    --top-pad:1.5rem;
+    --bottom-pad:2rem;
+    height:var(--container-size);
+    padding-top:var(--top-pad);
+    padding-bottom:var(--bottom-pad);
+    box-sizing:border-box;
 }
 
 #composite-loot-builder {
     --gutter:10px;
-    --bottom-pad:75px;
-    --cell-size:calc((var(--container-size) - var(--bottom-pad)) / 4);
+    --total-gutter:calc(var(--gutter) * 3);
+    --no-pad-size:calc(var(--container-size) - var(--top-pad) - var(--bottom-pad) - var(--total-gutter));
+    --cell-size:calc(var(--no-pad-size) / 4);
     display:grid;
     grid-template-columns:repeat(6, var(--cell-size));
     grid-template-rows:repeat(4, var(--cell-size));
@@ -77,13 +83,6 @@ body.composite-loot-page {
     content:"Inventory";
 }
 
-@media (min-width:769px) {
-    #composite-loot-inventory::before {
-        top:initial;
-        bottom:calc(-1 * var(--label-height) / 2);
-    }
-}
-
 .composite-loot-slot.slot-active:not(:hover) .composite-loot-button.btn {
     display:none;
 }
@@ -121,54 +120,6 @@ body.composite-loot-page {
 #composite-loot-inventory {
     grid-column:span 2;
     grid-row:span 2;
-}
-
-@media (max-width: 620px) {
-    body.composite-loot-page {
-        padding-top:100px;
-    }
-
-    #composite-loot-container {
-        padding-top:0;
-    }
-
-    #composite-loot-builder {
-        --cell-size:calc((100vh - 100px - 25px - var(--gutter) * 2) / 3);
-        --margin:20px;
-        --gutter:1.5rem;
-        padding:0 var(--margin);
-        grid-template-columns:repeat(1, var(--cell-size));
-        grid-template-rows:repeat(3, var(--cell-size));
-    }
-
-    .composite-loot-button.btn {
-        font-size:0.75rem;
-        padding:0.5rem 1rem;
-    }
-
-    #composite-loot-avatar {
-        grid-column:span 1;
-        grid-row:2 / 3;
-    }
-
-    #composite-loot-stats {
-        grid-column:span 1;
-        grid-row:1 / 2;
-    }
-
-    #composite-loot-inventory {
-        grid-column:span 1;
-        grid-row:3 / 4;
-    }
-
-    #edit-modal .dropdown {
-        max-width:100%;
-    }
-
-    #edit-modal .dropdown-toggle {
-        width:100%;
-        overflow: hidden;
-    }
 }
 
 #token-image {
@@ -268,4 +219,55 @@ body.composite-loot-page {
     right:0.25rem;
     padding:0 0.25rem;
     border-radius:0.25rem;
+}
+
+@media (min-width:769px) {
+    #composite-loot-inventory::before {
+        top:initial;
+        bottom:calc(-1 * var(--label-height) / 2);
+    }
+}
+
+@media (max-width: 620px) {
+    :root {
+        --distance-from-top:75px;
+    }
+
+    #composite-loot-builder {
+        --cell-size:calc((100vh - 100px - 25px - var(--gutter) * 2) / 3);
+        --margin:20px;
+        --gutter:1.5rem;
+        padding:0 var(--margin);
+        grid-template-columns:repeat(1, var(--cell-size));
+        grid-template-rows:repeat(3, var(--cell-size));
+    }
+
+    .composite-loot-button.btn {
+        font-size:0.75rem;
+        padding:0.5rem 1rem;
+    }
+
+    #composite-loot-avatar {
+        grid-column:span 1;
+        grid-row:2 / 3;
+    }
+
+    #composite-loot-stats {
+        grid-column:span 1;
+        grid-row:1 / 2;
+    }
+
+    #composite-loot-inventory {
+        grid-column:span 1;
+        grid-row:3 / 4;
+    }
+
+    #edit-modal .dropdown {
+        max-width:100%;
+    }
+
+    #edit-modal .dropdown-toggle {
+        width:100%;
+        overflow: hidden;
+    }
 }
