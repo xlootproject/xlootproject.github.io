@@ -1,7 +1,8 @@
 import { ethers } from "../node_modules/ethers/dist/ethers.esm.js";
 
 export class EditModal {
-    constructor (elementId, conn) {
+    constructor (elementId, provider) {
+        this.provider = provider;
         this.element = document.getElementById(elementId);
         this.component = new bootstrap.Modal(this.element);
         this.title = this.element.querySelector('.modal-title');
@@ -21,7 +22,7 @@ export class EditModal {
         this.menu.addEventListener('click', event => {
             const selected = event.target.closest('[data-collection-contract]');
             this.dropdownButton.textContent = `Collection: ${selected.textContent}`;
-            this.selectedCollection = selected.dataset.collectionContract;
+            this.selectedCollection = this.getCollectionFromOptionElement(selected);
             this.input.disabled = false;
             this.input.value = '';
             this.img.style.backgroundImage = '';
@@ -29,12 +30,7 @@ export class EditModal {
         });
 
         this.input.addEventListener('change', async () => {
-            const abi = [
-                "function tokenURI(uint256 _tokenId) external view returns (string memory)"
-            ];
-
-            const contract = new ethers.Contract(this.selectedCollection, abi, conn);
-
+            const contract = this.getCollectionContract(this.selectedCollection);
             const metadataURI = await contract.tokenURI(this.input.value);
             const metadataHttpURI = this.sanitizeURI(metadataURI);
             const metadata = await (await fetch(metadataHttpURI)).json();
@@ -64,6 +60,7 @@ export class EditModal {
         this.img.style.backgroundImage = '';
         this.selectedCollection = null;
         this.saveButton.disabled = true;
+        this.collections = null;
     }
 
     onSave (callback) {
@@ -71,6 +68,7 @@ export class EditModal {
     }
 
     populateCollections (collections) {
+        this.collections = collections;
         this.menu.innerHTML = `
             ${collections.map(collection => `
                 <li data-collection-contract="${collection.contract}">
@@ -91,5 +89,21 @@ export class EditModal {
             return `https://cloudflare-ipfs.com/ipfs/${uri.replace('ipfs://', '')}`;
         }
         else return uri;
+    }
+
+    getCollectionFromOptionElement (element) {
+        const address = element.dataset.collectionContract;
+
+        return this.collections.find(
+            collection => collection.contract === address
+        );
+    }
+
+    getCollectionContract (collection) {
+        const abi = [
+            "function tokenURI(uint256 _tokenId) external view returns (string memory)"
+        ];
+
+        return new ethers.Contract(collection.contract, abi, this.provider);
     }
 }
