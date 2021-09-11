@@ -12,6 +12,9 @@ export class EditModal {
         this.input = this.element.querySelector('#token-id-input');
         this.img = this.element.querySelector('#token-image');
         this.saveButton = this.element.querySelector('#token-save');
+        this.ethConnectButton = this.element.querySelector('#connect-wallet');
+        this.nftGallery = this.element.querySelector('#nft-gallery');
+        this.nftGalleryWarn = this.element.querySelector('#nft-gallery-warn');
 
         this.selectedCollection = null;
 
@@ -31,23 +34,34 @@ export class EditModal {
 
         this.input.addEventListener('change', async () => {
             const contract = this.getCollectionContract(this.selectedCollection);
-            const metadataURI = await contract.tokenURI(this.input.value);
-            const metadataHttpURI = this.sanitizeURI(metadataURI);
-            const metadata = await (await fetch(metadataHttpURI)).json();
-            const imageURI = this.sanitizeURI(metadata.image);
-            this.img.style.backgroundImage = `url(${imageURI})`;
-            this.imgSrc = imageURI;
-            this.saveButton.disabled = false;
+            const imageURI = await this.getTokenImage(contract, this.input.value);
+            this.setImagePreview(imageURI);
         });
 
         this.saveButton.addEventListener('click', () => {
             if (this.imgSrc) this.onSaveCallback(this.imgSrc);
             this.component.hide();
         });
+
+        this.ethConnectButton.addEventListener('click', async () => {
+            const accounts = await window.ethereum.request({
+                method: 'eth_requestAccounts'
+            });
+
+            if (!accounts || accounts.length === 0) return;
+            
+            this.address = accounts[0];
+
+            this.populateNFTGallery();
+        });
     }
 
     open () {
         this.component.show();
+
+        if (this.address) {
+                this.populateNFTGallery();
+        }
     }
 
     reset () {
@@ -61,6 +75,8 @@ export class EditModal {
         this.selectedCollection = null;
         this.saveButton.disabled = true;
         this.collections = null;
+        this.nftGallery.innerHTML = '';
+        this.nftGalleryWarn.hidden = true;
     }
 
     onSave (callback) {
@@ -91,6 +107,13 @@ export class EditModal {
         else return uri;
     }
 
+    async getTokenImage (contract, tokenId) {
+        const metadataURI = await contract.tokenURI(tokenId);
+        const metadataHttpURI = this.sanitizeURI(metadataURI);
+        const metadata = await (await fetch(metadataHttpURI)).json();
+        return this.sanitizeURI(metadata.image);
+    }
+
     getCollectionFromOptionElement (element) {
         const address = element.dataset.collectionContract;
 
@@ -101,9 +124,83 @@ export class EditModal {
 
     getCollectionContract (collection) {
         const abi = [
-            "function tokenURI(uint256 _tokenId) external view returns (string memory)"
+            "function tokenURI(uint256 _tokenId) external view returns (string memory)",
+            "function balanceOf(address owner) external view returns (uint256)",
+            "function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256 tokenId)"
         ];
 
         return new ethers.Contract(collection.contract, abi, this.provider);
+    }
+
+    async populateNFTGallery () {
+        this.ethConnectButton.hidden = true;
+
+        const tokenPromises = this.collections.map(collection => {
+            return {
+                collection,
+                contract: this.getCollectionContract(collection)
+            };
+        }).map(async ({ collection, contract }) => {
+            return {
+                contract,
+                tokensOwned: (await contract.balanceOf(this.address)).toNumber()
+            };
+        }).map(async result => {
+            const { contract, tokensOwned } = await result;
+
+            if (tokensOwned === 0) return Promise.resolve([]);
+
+            return Promise.all(
+                [...Array(tokensOwned).keys()].map(async index => {
+                    const result = contract.tokenOfOwnerByIndex(this.address, index);
+                    const tokenId = await result;
+                    return { contract, tokenId };
+                })
+            );
+        }).map(async result => {
+            const tokensFromCollection = await result;
+
+            const renderPromises = tokensFromCollection.map(async token => {
+                const { contract, tokenId } = token;
+                const imageURI = await this.getTokenImage(contract, tokenId);
+                return { contract, tokenId, imageURI };
+            }).map(async result => {
+                const { contract, tokenId, imageURI } = await result;
+                const el = document.createElement('li');
+                el.setAttribute('data-collection', contract.address);
+                el.setAttribute('data-token-id', tokenId);
+                el.classList.add('nft-gallery-token');
+                el.style.backgroundImage = `url(${imageURI})`;
+
+                const label = document.createElement('span');
+                label.classList.add('nft-token-label');
+                label.textContent = `#${tokenId}`;
+                el.appendChild(label);
+
+                el.addEventListener('click', () => {
+                    this.setImagePreview(imageURI);
+                });
+
+                return el;
+            }).map(async result => {
+                const tokenPreviewEl = await result;
+                this.nftGallery.appendChild(tokenPreviewEl);
+            });
+
+            return Promise.all(renderPromises);
+        });
+
+        const results = await Promise.all(tokenPromises);
+        const count = results.reduce((sum, r) => sum + r.length, 0);
+
+        if (count === 0) {
+            this.nftGalleryWarn.hidden = false;
+        }
+    }
+
+    setImagePreview (imageURI) {
+        this.img.style.backgroundImage = `url(${imageURI})`;
+        this.imgSrc = imageURI;
+        this.saveButton.disabled = false;
     }
 }

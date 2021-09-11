@@ -175,7 +175,7 @@ body.composite-loot-page {
     border-bottom:0;
 }
 
-#any-nft .tab-internal {
+#edit-modal .tab-internal {
     display:flex;
     flex-direction:column;
     align-items:stretch;
@@ -226,4 +226,37 @@ body.composite-loot-page {
     width:100%;
     border-radius:0;
     margin-bottom:0;
+}
+
+#nft-gallery {
+    margin:0;
+    padding:0;
+    width:100%;
+    display:flex;
+    overflow:auto;
+}
+
+#nft-gallery .nft-gallery-token {
+    --label-color:var(--bs-white);
+    --label-background:var(--bs-secondary);
+    list-style:none;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    flex:0 0 33%;
+    position:relative;
+    padding-bottom:33%;
+    margin-right:1rem;
+    cursor:pointer;
+}
+
+#nft-gallery .nft-gallery-token .nft-token-label {
+    content:"#" attr(data-token-id);
+    background:var(--label-background);
+    color:var(--label-color);
+    position:absolute;
+    bottom:0.25rem;
+    right:0.25rem;
+    padding:0 0.25rem;
+    border-radius:0.25rem;
 }

@@ -116,10 +116,14 @@
                                     <img src="../assets/img/metamask-fox.svg" />
                                     Connect your wallet
                                 </button>
+                                <ul id="nft-gallery" aria-label="NFT preview gallery"></ul>
+                                <div id="nft-gallery-warn" class="alert alert-warning" role="alert" hidden>
+                                    <p>You have no NFTs that fit this slot (from the supported collections)</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="token-image"></div>
+                    <div id="token-image" aria-label="Token image preview"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button id="token-save" type="button" class="btn btn-primary" disabled>Save changes</button>
