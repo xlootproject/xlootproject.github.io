@@ -1,12 +1,19 @@
 :root {
     --bs-body-bg: var(--bs-gray-800) !important;
-    --distance-from-top:150px;
-    --container-size:calc(100vh - var(--distance-from-top));
+    --distance-from-top:3.5rem;
+    --share-bar-height:5rem;
+    --container-size:calc(100vh - var(--distance-from-top) - var(--share-bar-height));
     height:100%;
 }
 
 body.composite-loot-page {
     padding-top:var(--distance-from-top);
+}
+
+#sharing-bar {
+    height:var(--share-bar-height);
+    display:flex;
+    align-items:center;
 }
 
 #composite-loot-container {
