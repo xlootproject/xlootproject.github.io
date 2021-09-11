@@ -15,4 +15,13 @@ copyBtn.addEventListener('click', async () => {
             [blobData.type]: blobData
         })
     ]);
+
+    const btnText = copyBtn.querySelector('.btn-text');
+    const originalText = btnText.textContent;
+    copyBtn.classList.add('success');
+    btnText.textContent = 'Copied!';
+    setInterval(() => {
+        copyBtn.classList.remove('success');
+        btnText.textContent = originalText;
+    }, 5000);
 });

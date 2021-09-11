@@ -19,6 +19,22 @@ body.composite-loot-page {
     position:relative;
 }
 
+#copy-composite.success {
+    background-color:var(--bs-primary);
+}
+
+#copy-composite .fa-check {
+    display:none;
+}
+
+#copy-composite.success .fa-copy {
+    display:none;
+}
+
+#copy-composite.success .fa-check {
+    display:inline;
+}
+
 #composite-loot-container {
     --top-pad:1.5rem;
     --bottom-pad:2rem;
