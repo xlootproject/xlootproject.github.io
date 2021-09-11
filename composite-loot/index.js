@@ -41,3 +41,14 @@ inventorySlotButton.onClick(async () => {
     modal.onSave(url => { inventorySlotButton.setSlot(url); });
     modal.open();
 });
+
+(async function () {
+    const blockNumber = await provider.getBlockNumber();
+    if (blockNumber === 0) {
+        const alertEl = document.getElementById('eth-connection-error');
+        alertEl.removeAttribute('hidden');
+
+        const btns = document.querySelectorAll('.composite-loot-button');
+        Array.from(btns).forEach(btn => btn.disabled = true);
+    }
+})();

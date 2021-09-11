@@ -219,3 +219,11 @@ body.composite-loot-page {
 #connect-wallet img {
     margin-right:1rem;
 }
+
+#eth-connection-error {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    border-radius:0;
+    margin-bottom:0;
+}
