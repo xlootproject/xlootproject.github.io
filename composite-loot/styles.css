@@ -7,22 +7,25 @@
 }
 
 body.composite-loot-page {
-    padding-top:var(--distance-from-top);
+    height:100%;
 }
 
 #sharing-bar {
     height:var(--share-bar-height);
     display:flex;
     align-items:center;
+    position:relative;
+    top:var(--distance-from-top);
 }
 
 #composite-loot-container {
-    height:var(--container-size);
+    padding-top:var(--distance-from-top);
+    height:100%;
 }
 
 #composite-loot-builder {
     --gutter:10px;
-    --bottom-pad:100px;
+    --bottom-pad:75px;
     --cell-size:calc((var(--container-size) - var(--bottom-pad)) / 4);
     display:grid;
     grid-template-columns:repeat(6, var(--cell-size));
@@ -126,12 +129,13 @@ body.composite-loot-page {
     }
 
     #composite-loot-container {
-        height:calc(100vh - 100px);
+        padding-top:0;
     }
 
     #composite-loot-builder {
         --cell-size:calc((100vh - 100px - 25px - var(--gutter) * 2) / 3);
         --margin:20px;
+        --gutter:1.5rem;
         padding:0 var(--margin);
         grid-template-columns:repeat(1, var(--cell-size));
         grid-template-rows:repeat(3, var(--cell-size));
@@ -173,6 +177,21 @@ body.composite-loot-page {
     border:1px solid var(--bs-gray-400);
     width:350px;
     height:350px;
+    align-self:center;
+}
+
+#edit-modal .modal-header {
+    border-bottom:0;
+}
+
+#edit-modal .tab-internal {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+}
+
+#edit-modal .dropdown-menu {
+    width:100%;
 }
 
 #edit-modal .dropdown-toggle {
@@ -180,4 +199,73 @@ body.composite-loot-page {
     box-shadow:none!important;
     padding-left:0.75rem;
     margin-bottom:20px;
+}
+
+#edit-modal .modal-footer {
+    margin-top:1rem;
+    justify-content:stretch;
+}
+
+#edit-modal .modal-footer .btn {
+    flex:1 0;
+    padding:0;
+    height:3.5rem;
+}
+
+#your-nfts .tab-internal {
+    display:flex;
+}
+
+#connect-wallet {
+    border:solid 1px var(--bs-gray-400);
+    margin:auto;
+}
+
+#connect-wallet:active {
+    background:var(--bs-gray-200);
+}
+
+#connect-wallet img {
+    margin-right:1rem;
+}
+
+#eth-connection-error {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    border-radius:0;
+    margin-bottom:0;
+}
+
+#nft-gallery {
+    margin:0;
+    padding:0;
+    width:100%;
+    display:flex;
+    overflow:auto;
+}
+
+#nft-gallery .nft-gallery-token {
+    --label-color:var(--bs-white);
+    --label-background:var(--bs-secondary);
+    list-style:none;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    flex:0 0 33%;
+    position:relative;
+    padding-bottom:33%;
+    margin-right:1rem;
+    cursor:pointer;
+}
+
+#nft-gallery .nft-gallery-token .nft-token-label {
+    content:"#" attr(data-token-id);
+    background:var(--label-background);
+    color:var(--label-color);
+    position:absolute;
+    bottom:0.25rem;
+    right:0.25rem;
+    padding:0 0.25rem;
+    border-radius:0.25rem;
 }
