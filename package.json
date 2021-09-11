@@ -18,6 +18,7 @@
   "homepage": "https://github.com/xlootproject/xlootproject.github.io#readme",
   "dependencies": {
     "bootstrap": "5.1.0",
+    "ethers": "5.4.6",
     "http-server": "13.0.1"
   }
 }

@@ -1,0 +1,11 @@
+[
+    { "name": "Forgotten Runes Wizard's Cult", "contract": "0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42" },
+    { "name": "MetaHero Universe", "contract": "0x6dc6001535e15b9def7b0f6a20a2111dfa9454e2" },
+    { "name": "KILLAz", "contract": "0x21850dcfe24874382b12d05c5b189f5a2acf0e5b" },
+    { "name": "Evaverse", "contract": "0x837704ec8dfec198789baf061d6e93b0e1555da6" },
+    { "name": "Animetas", "contract": "0x18df6c571f6fe9283b87f910e41dc5c8b77b7da5" },
+    { "name": "The Sevens", "contract": "0xf497253c2bb7644ebb99e4d9ecc104ae7a79187a" },
+    { "name": "0N1 Force", "contract": "0x3bf2922f4520a8ba0c2efc3d2a1539678dad5e9d" },
+    { "name": "Neon Junkies", "contract": "0x2e956ed3d7337f4ed4316a6e8f2edf74bf84bb54" },
+    { "name": "Creature World", "contract": "0xc92ceddfb8dd984a89fb494c376f9a48b999aafc" }
+]
