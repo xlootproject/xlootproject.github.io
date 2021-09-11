@@ -56,11 +56,23 @@ export class EditModal {
         });
     }
 
-    open () {
+    async open () {
         this.component.show();
 
         if (this.address) {
                 this.populateNFTGallery();
+        }
+
+        if (!this.address && window.ethereum) {
+            const signer = this.provider.getSigner();
+            try {
+                const address = await signer.getAddress();
+                this.address = address;
+                this.populateNFTGallery();
+            }
+            catch (e) {
+                console.log('Ethereum wallet exists, not connected');
+            }
         }
     }
 
