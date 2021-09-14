@@ -13,6 +13,7 @@
     --rarity-epic:#9C2009;
     --rarity-rare:#11474F;
     --rarity-uncommon:#394F09;
+    --rarity-common:var(--bs-black);
 }
 
 #loot-card::after {
@@ -58,3 +59,4 @@
 #loot-card[data-ranking=epic] { --highlight-color:var(--rarity-epic); }
 #loot-card[data-ranking=rare] { --highlight-color:var(--rarity-rare); }
 #loot-card[data-ranking=uncommon] { --highlight-color:var(--rarity-uncommon); }
+#loot-card[data-ranking=common] { --highlight-color:var(--rarity-common); }
