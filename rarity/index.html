@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <!-- Social Media Meta Tags -->
+        <meta property="og:title" content="xLoot Rarity">
+        <meta property="og:description" content="Check the rarity ranking of your xLoot bags. The rarity of the items and bag is color-coded from Mythical to Common. Find the rarest bag!">
+        <meta property="og:image" content="https://xloot.info/rarity/thumbnail.png">
+        <meta property="og:url" content="https://xloot.info/rarity/">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="og:site_name" content="xLoot">
+        <meta name="twitter:image:alt" content="Screenshot of xLoot rarity page showing a Legendary loot bag">
+        <meta name="twitter:site" content="@xlootproject">
+
+        <title>xLoot - Rarity</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <link href="../css/custom-styles.css" rel="stylesheet" />
+        <link href="./styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-light-bg" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">xLoot Project</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">What is xLoot?</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#info">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../resources.html">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="../rarity/">Rarity</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../composite-loot/">Composite Loot</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://opensea.io/collection/xloot" target="_blank">OpenSea</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Rarity Tool -->
+        <section id="rarity-tool" class="projects-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col col-md-6">
+                        <h2 class="text-black mb-5 text-center">Rarity</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col col-md-6">
+                        <p>Check the rarity of your xLoot here. The colors
+                        indicate the rarity of each item and the bag as a whole.
+                        Ranking 1 being the rarest and 8000 the least rare.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col col-md-4 px-0">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="token-id-label">Token ID</span>
+                            <input id="token-id-input" type="text" class="form-control" aria-describedby="token-id-label" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <button id="check-rarity" class="col col-md-4 btn btn-primary">
+                        Check Rarity
+                    </button>
+                </div>
+                <div class="row justify-content-center align-items-center my-4">
+                    <div id="loot-ranking" class="col col-md-4 px-0" hidden></div>
+                </div>
+                <div class="row justify-content-center align-items-center my-4">
+                    <ul id="loot-card" class="card col col-md-4" hidden></ul>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <h6 id="legend-title" class="col-md-4 text-black px-0" hidden>Legend</h6>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div id="legend" class="col-md-4 text-black mb-5 px-0" hidden>
+                        <span class="legend-color" data-ranking="mythical">Mythical</span>
+                        <span class="legend-color" data-ranking="legendary">Legendary</span>
+                        <span class="legend-color" data-ranking="epic">Epic</span>
+                        <span class="legend-color" data-ranking="rare">Rare</span>
+                        <span class="legend-color" data-ranking="uncommon">Uncommon</span>
+                        <span class="legend-color" data-ranking="common">Common</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center my-4">
+                    <div id="icons-credit" class="col col-md-4 px-0" hidden>
+                        Icons by <a href="https://github.com/game-icons/icons">game-icons</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="./index.js" type="module" async></script>
+    </body>
+</html>
