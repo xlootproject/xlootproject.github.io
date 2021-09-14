@@ -1,22 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Varela+Round&display=swap');
+
 :root {
     --bs-body-bg: var(--bs-gray-800) !important;
-    --distance-from-top:150px;
+    --navbar-height:88px;
+    --share-bar-height:3rem;
+    --distance-from-top:calc(var(--navbar-height) + var(--share-bar-height));
     --container-size:calc(100vh - var(--distance-from-top));
     height:100%;
 }
 
 body.composite-loot-page {
-    padding-top:var(--distance-from-top);
+    height:100%;
+    padding-top:var(--navbar-height);
+}
+
+#sharing-bar {
+    height:var(--share-bar-height);
+    display:flex;
+    align-items:center;
+    position:relative;
+}
+
+#copy-composite.success {
+    background-color:var(--bs-primary);
+}
+
+#copy-composite .fa-check {
+    display:none;
+}
+
+#copy-composite.success .fa-copy {
+    display:none;
+}
+
+#copy-composite.success .fa-check {
+    display:inline;
 }
 
 #composite-loot-container {
+    --top-pad:1.5rem;
+    --bottom-pad:2rem;
     height:var(--container-size);
+    padding-top:var(--top-pad);
+    padding-bottom:var(--bottom-pad);
+    box-sizing:border-box;
 }
 
 #composite-loot-builder {
     --gutter:10px;
-    --bottom-pad:100px;
-    --cell-size:calc((var(--container-size) - var(--bottom-pad)) / 4);
+    --total-gutter:calc(var(--gutter) * 3);
+    --no-pad-size:calc(var(--container-size) - var(--top-pad) - var(--bottom-pad) - var(--total-gutter));
+    --cell-size:calc(var(--no-pad-size) / 4);
     display:grid;
     grid-template-columns:repeat(6, var(--cell-size));
     grid-template-rows:repeat(4, var(--cell-size));
@@ -67,13 +101,6 @@ body.composite-loot-page {
     content:"Inventory";
 }
 
-@media (min-width:769px) {
-    #composite-loot-inventory::before {
-        top:initial;
-        bottom:calc(-1 * var(--label-height) / 2);
-    }
-}
-
 .composite-loot-slot.slot-active:not(:hover) .composite-loot-button.btn {
     display:none;
 }
@@ -113,18 +140,121 @@ body.composite-loot-page {
     grid-row:span 2;
 }
 
-@media (max-width: 620px) {
-    body.composite-loot-page {
-        padding-top:100px;
-    }
+#token-image {
+    background-size:contain;
+    background-position:center;
+    border:1px solid var(--bs-gray-400);
+    width:350px;
+    height:350px;
+    align-self:center;
+}
 
-    #composite-loot-container {
-        height:calc(100vh - 100px);
+#edit-modal .modal-header {
+    border-bottom:0;
+}
+
+#edit-modal .tab-internal {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+}
+
+#edit-modal .dropdown-menu {
+    width:100%;
+}
+
+#edit-modal .dropdown-toggle {
+    border:1px solid var(--bs-gray-400);
+    box-shadow:none!important;
+    padding-left:0.75rem;
+    margin-bottom:20px;
+}
+
+#edit-modal .modal-footer {
+    margin-top:1rem;
+    justify-content:stretch;
+}
+
+#edit-modal .modal-footer .btn {
+    flex:1 0;
+    padding:0;
+    height:3.5rem;
+}
+
+#your-nfts .tab-internal {
+    display:flex;
+}
+
+#connect-wallet {
+    border:solid 1px var(--bs-gray-400);
+    margin:auto;
+}
+
+#connect-wallet:active {
+    background:var(--bs-gray-200);
+}
+
+#connect-wallet img {
+    margin-right:1rem;
+}
+
+#eth-connection-error {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    border-radius:0;
+    margin-bottom:0;
+}
+
+#nft-gallery {
+    margin:0;
+    padding:0;
+    width:100%;
+    display:flex;
+    overflow:auto;
+}
+
+#nft-gallery .nft-gallery-token {
+    --label-color:var(--bs-white);
+    --label-background:var(--bs-secondary);
+    list-style:none;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    flex:0 0 33%;
+    position:relative;
+    padding-bottom:33%;
+    margin-right:1rem;
+    cursor:pointer;
+}
+
+#nft-gallery .nft-gallery-token .nft-token-label {
+    content:"#" attr(data-token-id);
+    background:var(--label-background);
+    color:var(--label-color);
+    position:absolute;
+    bottom:0.25rem;
+    right:0.25rem;
+    padding:0 0.25rem;
+    border-radius:0.25rem;
+}
+
+@media (min-width:769px) {
+    #composite-loot-inventory::before {
+        top:initial;
+        bottom:calc(-1 * var(--label-height) / 2);
+    }
+}
+
+@media (max-width: 620px) {
+    :root {
+        --distance-from-top:75px;
     }
 
     #composite-loot-builder {
         --cell-size:calc((100vh - 100px - 25px - var(--gutter) * 2) / 3);
         --margin:20px;
+        --gutter:1.5rem;
         padding:0 var(--margin);
         grid-template-columns:repeat(1, var(--cell-size));
         grid-template-rows:repeat(3, var(--cell-size));
@@ -158,19 +288,4 @@ body.composite-loot-page {
         width:100%;
         overflow: hidden;
     }
-}
-
-#token-image {
-    background-size:contain;
-    background-position:center;
-    border:1px solid var(--bs-gray-400);
-    width:350px;
-    height:350px;
-}
-
-#edit-modal .dropdown-toggle {
-    border:1px solid var(--bs-gray-400);
-    box-shadow:none!important;
-    padding-left:0.75rem;
-    margin-bottom:20px;
 }
