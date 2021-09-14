@@ -90,10 +90,18 @@ fetch('./rarity.json').then(async response => {
         checkRarityButton.disable = false;
     }
 
-    checkRarityButton.addEventListener('click', async () => {
+    async function onTokenSelect () {
         const tokenId = tokenIdInput.value;
         await fetchAndDisplayRarity(tokenId);
         history.pushState({ tokenId }, '', `?token=${tokenId}`);
+    }
+
+    checkRarityButton.addEventListener('click', async () => {
+        onTokenSelect();
+    });
+
+    tokenIdInput.addEventListener('keypress', async event => {
+        if (event.which === 13) onTokenSelect();
     });
 
     window.addEventListener('popstate', event => {
