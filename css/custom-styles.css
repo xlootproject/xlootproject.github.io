@@ -1,3 +1,16 @@
+#mainNav.navbar-light-bg .navbar-brand,
+#mainNav.navbar-light-bg .nav-link {
+    color:var(--bs-black);
+}
+
+#mainNav.navbar-light-bg {
+    background:var(--bs-white);
+}
+
+#mainNav.navbar-light-bg .navbar-nav .nav-link.active {
+    color:var(--bs-primary);
+}
+
 #mainNav .navbar-nav .nav-link.active {
     color:var(--bs-white);
 }

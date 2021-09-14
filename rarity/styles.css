@@ -1,0 +1,60 @@
+#rarity-tool {
+    font-family:"EB Garamond", serif;
+}
+
+#loot-card {
+    position:relative;
+    padding-top:1rem;
+    padding-bottom:4rem;
+    border:solid var(--highlight-color);
+    border-width:1px 1px 3rem 1px;
+    --rarity-mythical:#CFBC2B;
+    --rarity-legendary:#7F309C;
+    --rarity-epic:#9C2009;
+    --rarity-rare:#11474F;
+    --rarity-uncommon:#394F09;
+}
+
+#loot-card::after {
+    content:attr(data-ranking);
+    position:absolute;
+    bottom:-2.5rem;
+    right:1rem;
+    text-transform:capitalize;
+    font-size:1.5rem;
+    color:var(--bs-white);
+}
+
+#loot-card .loot-item {
+    display:flex;
+    align-items:center;
+    font-size:1rem;
+    margin-bottom:.25rem;
+}
+
+#loot-card .loot-item .loot-icon {
+    margin-right:1rem;
+}
+
+#loot-card .loot-item .loot-icon svg {
+    width:1rem !important;
+    height:1rem !important;
+}
+
+#loot-card .loot-item:not(.common) .loot-item-name {
+    padding:.125rem .25rem;
+    border-radius:.25rem;
+    color:var(--bs-white);
+}
+
+#loot-card .loot-item.mythical .loot-item-name { background:var(--rarity-mythical); }
+#loot-card .loot-item.legendary .loot-item-name { background:var(--rarity-legendary); }
+#loot-card .loot-item.epic .loot-item-name { background:var(--rarity-epic); }
+#loot-card .loot-item.rare .loot-item-name { background:var(--rarity-rare); }
+#loot-card .loot-item.uncommon .loot-item-name { background:var(--rarity-uncommon); }
+
+#loot-card[data-ranking=mythical] { --highlight-color:var(--rarity-mythical); }
+#loot-card[data-ranking=legendary] { --highlight-color:var(--rarity-legendary); }
+#loot-card[data-ranking=epic] { --highlight-color:var(--rarity-epic); }
+#loot-card[data-ranking=rare] { --highlight-color:var(--rarity-rare); }
+#loot-card[data-ranking=uncommon] { --highlight-color:var(--rarity-uncommon); }
