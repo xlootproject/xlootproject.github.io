@@ -91,13 +91,22 @@ fetch('./rarity.json').then(async response => {
     }
 
     checkRarityButton.addEventListener('click', async () => {
-        fetchAndDisplayRarity(tokenIdInput.value);
+        const tokenId = tokenIdInput.value;
+        await fetchAndDisplayRarity(tokenId);
+        history.pushState({ tokenId }, '', `?token=${tokenId}`);
+    });
+
+    window.addEventListener('popstate', event => {
+        const tokenId = event.state.tokenId;
+        tokenIdInput.value = tokenId;
+        fetchAndDisplayRarity(tokenId);
     });
 
     const urlParams = new URLSearchParams(location.search);
     const token = urlParams.get('token');
     if (token) {
         tokenIdInput.value = token;
+        history.replaceState({ tokenId: token }, '');
         fetchAndDisplayRarity(token);
     }
 });
