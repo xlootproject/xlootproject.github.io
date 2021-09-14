@@ -1,6 +1,7 @@
 [
     { "name": "Loot", "contract": "0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7" },
     { "name": "xLoot", "contract": "0x8bf2f876e2dcd2cae9c3d272f325776c82da366d" },
+    { "name": "mLoot", "contract": "0x1dfe7ca09e99d10835bf73044a23b73fc20623df" },
     { "name": "Loot of Ether", "contract": "0x7AbCAb68ef30050D1eEeD3a6554587a1DC9E26EB" },
     { "name": "Loot (for Cyberpunks)", "contract": "0x13a48f723f4ad29b6da6e7215fe53172c027d98f" },
     { "name": "Loot+", "contract": "0xb460e850255931adf9532648475afab60bf02667" }
