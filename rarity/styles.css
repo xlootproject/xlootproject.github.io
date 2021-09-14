@@ -16,14 +16,23 @@
     border-width:1px 1px 3rem 1px;
 }
 
+#loot-card::before,
 #loot-card::after {
-    content:attr(data-ranking);
     position:absolute;
     bottom:-2.5rem;
-    right:1rem;
     text-transform:capitalize;
     font-size:1.5rem;
     color:var(--bs-white);
+}
+
+#loot-card::before {
+    content:"Bag #" attr(data-token);
+    left:1rem;
+}
+
+#loot-card::after {
+    content:attr(data-ranking);
+    right:1rem;
 }
 
 #loot-card .loot-item {

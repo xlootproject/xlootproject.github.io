@@ -57,9 +57,11 @@ fetch('./rarity.json').then(async response => {
         lootRanking.textContent = `Ranking: #${ranking}`;
     }
 
-    function renderCard (items, ranking) {
+    function renderCard (items, tokenId) {
+        const ranking = getCardRarity(tokenId);
         lootCard.innerHTML = '';
         lootCard.dataset.ranking = ranking;
+        lootCard.dataset.token = tokenId;
 
         items.forEach(async (item, i) => {
             const el = document.createElement('li');
@@ -88,7 +90,7 @@ fetch('./rarity.json').then(async response => {
         const items = await getItemsFromMetadata(metadata);
 
         renderRanking(tokenId);
-        renderCard(items, getCardRarity(tokenId));
+        renderCard(items, tokenId);
         showCard();
 
         checkRarityButton.disable = false;
