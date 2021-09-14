@@ -13,6 +13,8 @@ fetch('./rarity.json').then(async response => {
     const lootCard = document.getElementById('loot-card');
     const lootRanking = document.getElementById('loot-ranking');
     const iconsCredit = document.getElementById('icons-credit');
+    const legend = document.getElementById('legend');
+    const legendTitle = document.getElementById('legend-title');
 
     async function getItemsFromMetadata (metadata) {
         const svgString = await (await fetch(metadata.image)).text();
@@ -75,6 +77,8 @@ fetch('./rarity.json').then(async response => {
         lootRanking.hidden = false;
         lootCard.hidden = false;
         iconsCredit.hidden = false;
+        legendTitle.hidden = false;
+        legend.hidden = false;
     }
 
     async function fetchAndDisplayRarity (tokenId) {
